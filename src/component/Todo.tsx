@@ -27,13 +27,13 @@ function Todo() {
 
   function AddTask() {
     if (newTask.trim() === "") return
-    
-    const dupicate =task.some((t)=>t.text.toLowerCase()===newTask.trim().toLowerCase())
-    if(dupicate){
+
+    const dupicate = task.some((t) => t.text.toLowerCase() === newTask.trim().toLowerCase())
+    if (dupicate) {
       alert("Task already exists !")
-      return 
+      return
     }
-    
+
     const newTaskItem: Task = {
       id: Date.now(),
       text: newTask,
@@ -57,11 +57,16 @@ function Todo() {
   }
 
   function saveEditedTask(id: number): void {
-    console.log('from save function', task)
-        if(editedText.trim()===""){
-          alert('task connot be empty')
-          return
-        }
+    console.log('from save fun', task)
+    if (editedText.trim() === "") {
+      alert('task connot be empty')
+      return
+    }
+    const dupicate = task.some((item) => item.text === editedText.trim() && item.id !== id)
+    if (dupicate) {
+      alert("This task already exists")
+      return
+    }
     const updatedTasks: Task[] = task.map((item): Task => {
 
       if (item.id === id) {
@@ -94,7 +99,7 @@ function Todo() {
     <div className="todo-container">
       <h1>TO-DO-List</h1>
       <div>
-        
+
         <input type="text" placeholder="Enter Task" value={newTask} onChange={e => setNewTask(e.target.value)} />
         <button onClick={AddTask}>ADD</button>
         <ul>
@@ -107,7 +112,7 @@ function Todo() {
                   <span>{item.text}</span>
                   <button onClick={() => startEditing(item.id, item.text)}>Edit</button>
                   <button onClick={() => delectTask(item.id)}>Delect</button>
-                  
+
                 </>
               ) : (
                 <>
