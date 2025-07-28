@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { toast } from "react-toastify"
 
 
 type Task = {
@@ -30,7 +31,7 @@ function Todo() {
 
     const dupicate = task.some((t) => t.text.toLowerCase() === newTask.trim().toLowerCase())
     if (dupicate) {
-      alert("Task already exists !")
+      toast.warning("Task already exists !")
       return
     }
 
@@ -59,12 +60,12 @@ function Todo() {
   function saveEditedTask(id: number): void {
     console.log('from save fun', task)
     if (editedText.trim() === "") {
-      alert('task connot be empty')
+      toast.warning('task connot be empty')
       return
     }
     const dupicate = task.some((item) => item.text === editedText.trim() && item.id !== id)
     if (dupicate) {
-      alert("This task already exists")
+      toast.warning("This task already exists")
       return
     }
     const updatedTasks: Task[] = task.map((item): Task => {
