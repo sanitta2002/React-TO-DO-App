@@ -96,6 +96,8 @@ function Todo() {
 
 
 
+
+
   return (
     <div className="todo-container">
       <h1>TO-DO-List</h1>
@@ -112,7 +114,8 @@ function Todo() {
                   <input type="checkbox" checked={item.completed} onChange={() => toggleComplete(item.id)} />
                   <span>{item.text}</span>
                   <button onClick={() => startEditing(item.id, item.text)}>Edit</button>
-                  <button onClick={() => delectTask(item.id)}>Delect</button>
+                  <button onClick={() => delectTask(item.id)}>Delete</button>
+                  
 
                 </>
               ) : (
